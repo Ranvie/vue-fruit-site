@@ -1,0 +1,23 @@
+{
+  "0": {
+    "iconSrc": "assets/img/fruits/apple.png",
+    "productName": "Apple",
+    "currencyUnit": "$",
+    "price": "4.8",
+    "quantity": "10"
+  },
+  "1": {
+    "iconSrc": "assets/img/fruits/pineapple.png",
+    "productName": "Pineapple",
+    "currencyUnit": "$",
+    "price": "7.23",
+    "quantity": "3"
+  },
+  "2": {
+    "iconSrc": "assets/img/fruits/orange.png",
+    "productName": "Orange",
+    "currencyUnit": "$",
+    "price": "3.68",
+    "quantity": "8"
+  }
+}

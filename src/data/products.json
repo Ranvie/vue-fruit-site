@@ -1,0 +1,121 @@
+{
+  "0": {
+    "iconSrc": "assets/img/fruits/apple.png",
+    "productName": "apple",
+    "type": "Fruit",
+    "currencyUnit": "$",
+    "price": "12.73"
+  },
+  "1": {
+    "iconSrc": "assets/img/fruits/avocado.png",
+    "productName": "avocado",
+    "type": "Fruit",
+    "currencyUnit": "$",
+    "price": "2.83"
+  },
+  "2": {
+    "iconSrc": "assets/img/fruits/banana.png",
+    "productName": "banana",
+    "type": "Fruit",
+    "currencyUnit": "$",
+    "price": "12.47"
+  },
+  "3": {
+    "iconSrc": "assets/img/fruits/blueberry.png",
+    "productName": "blueberry",
+    "type": "Fruit",
+    "currencyUnit": "$",
+    "price": "13.01"
+  },
+  "4": {
+    "iconSrc": "assets/img/fruits/cherry.png",
+    "productName": "cherry",
+    "type": "Fruit",
+    "currencyUnit": "$",
+    "price": "16.27"
+  },
+  "5": {
+    "iconSrc": "assets/img/fruits/dragon-fruit.png",
+    "productName": "dragon-fruit",
+    "type": "Fruit",
+    "currencyUnit": "$",
+    "price": "11.64"
+  },
+  "6": {
+    "iconSrc": "assets/img/fruits/grapefruit.png",
+    "productName": "grapefruit",
+    "type": "Fruit",
+    "currencyUnit": "$",
+    "price": "6.04"
+  },
+  "7": {
+    "iconSrc": "assets/img/fruits/lemon.png",
+    "productName": "lemon",
+    "type": "Fruit",
+    "currencyUnit": "$",
+    "price": "11.67"
+  },
+  "8": {
+    "iconSrc": "assets/img/fruits/mango.png",
+    "productName": "mango",
+    "type": "Fruit",
+    "currencyUnit": "$",
+    "price": "11.02"
+  },
+  "9": {
+    "iconSrc": "assets/img/fruits/orange.png",
+    "productName": "orange",
+    "type": "Fruit",
+    "currencyUnit": "$",
+    "price": "8.76"
+  },
+  "10": {
+    "iconSrc": "assets/img/fruits/peach.png",
+    "productName": "peach",
+    "type": "Fruit",
+    "currencyUnit": "$",
+    "price": "7.10"
+  },
+  "11": {
+    "iconSrc": "assets/img/fruits/pear.png",
+    "productName": "pear",
+    "type": "Fruit",
+    "currencyUnit": "$",
+    "price": "11.39"
+  },
+  "12": {
+    "iconSrc": "assets/img/fruits/pineapple.png",
+    "productName": "pineapple",
+    "type": "Fruit",
+    "currencyUnit": "$",
+    "price": "15.17"
+  },
+  "13": {
+    "iconSrc": "assets/img/fruits/pomegramate.png",
+    "productName": "pomegranate",
+    "type": "Fruit",
+    "currencyUnit": "$",
+    "price": "12.76"
+  },
+  "14": {
+    "iconSrc": "assets/img/fruits/strawberry.png",
+    "productName": "strawberry",
+    "type": "Fruit",
+    "currencyUnit": "$",
+    "price": "2.89"
+  },
+  "15": {
+    "iconSrc": "assets/img/fruits/tomato.png",
+    "productName": "tomato",
+    "type": "Fruit",
+    "currencyUnit": "$",
+    "price": "4.22"
+  },
+  "16": {
+    "iconSrc": "assets/img/fruits/watermelon.png",
+    "productName": "watermelon",
+    "type": "Fruit",
+    "currencyUnit": "$",
+    "price": "8.75"
+  }
+}
