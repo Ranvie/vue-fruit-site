@@ -9,14 +9,34 @@
 
 <script>
 import ProductList from '../../components/ProductList.vue'
-import pastOrdersJson from '../../data/pastOrders.json'
+import UtilMethods from '../../shared/UtilMethods.vue'
 
 export default {
   name: 'ProductPage',
   data(){
     return {
-      pastOrders: pastOrdersJson
+      pastOrders: this.receivedPastOrders
     }
+  },
+  props: {
+    receivedPastOrders: Object
+  },
+  methods: {
+    requireIcons(){
+      if(this.pastOrders != null)
+      {
+        for(let i=0; i < Object.keys(this.pastOrders).length; i++)
+        {
+          if(!this.pastOrders[i].iconSrc.includes('data:'))
+          {
+            this.pastOrders[i].iconSrc = UtilMethods.requireProdIcon(this.pastOrders[i]);
+          }
+        }
+      }
+    }
+  },
+  mounted(){
+    this.requireIcons();
   },
   components: {
     ProductList

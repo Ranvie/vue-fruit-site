@@ -5,7 +5,7 @@
       <section id="catalog-items">
         <CatalogItem 
           v-for="(product, i) in products" :key="i" 
-          :itemName="product.productName"
+          :productName="product.productName"
           :type="product.type" 
           :price="product.price" 
           :iconSrc="Utils.requireProdIcon(product)" 
@@ -35,7 +35,7 @@ export default {
   methods: {
     handleAddToCart(cartItem)
     {
-      console.log(cartItem);
+      this.$emit('onAddToCart', cartItem);
     }
   }
 }

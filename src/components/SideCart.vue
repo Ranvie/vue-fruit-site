@@ -6,9 +6,9 @@
         <button @click="handleCloseCart">x</button>
       </header>
       <section>
-        <p v-if="Object.keys(pastOrders).length == 0" class="no-items">No items in cart</p>
+        <p v-if="products == null || Object.keys(products).length == 0" class="no-items">No items in cart</p>
         <div v-else>
-          <ProductList :productsToShow="pastOrders" :isRemovable="true"/>
+          <ProductList :productsToShow="products" :isRemovable="true" @onRemoveListItem="handleRemoveListItem"/>
           <div class="grid">
             <p class="total"><strong>Total:</strong> {{currencyUnit}}{{total}}</p>
             <button @click="handleCheckout">Checkout</button>
@@ -21,12 +21,10 @@
 
 <script>
 import ProductList from './ProductList.vue'
-import pastOrdersJson from '../data/pastOrders.json'
 
 export default {
   data(){
     return {
-      pastOrders: pastOrdersJson,
       total: 0
     }
   },
@@ -34,7 +32,8 @@ export default {
     currencyUnit: {
       type: String,
       default: '$'
-    }
+    },
+    products: Object
   },
   components: {
     ProductList
@@ -47,16 +46,29 @@ export default {
     handleCheckout()
     {
       this.$emit('onCheckout');
+    },
+    updateTotal()
+    {
+      if(this.products != null)
+      {
+        let auxTotal = 0;
+
+        for(let i=0; i < Object.keys(this.products).length; i++)
+        {
+          auxTotal += (Number.parseFloat(this.products[i].price) * Number.parseInt(this.products[i].quantity));
+        }
+
+        this.total = auxTotal.toFixed(2);
+      }
+    },
+    handleRemoveListItem(index)
+    {
+      this.$emit('onRemoveListItem', index);
     }
   },
-  created()
+  updated()
   {
-    for(let i=0; i < Object.keys(this.pastOrders).length; i++)
-    {
-      this.total += (Number.parseFloat(this.pastOrders[i].price) * Number.parseInt(this.pastOrders[i].quantity));
-    }
-
-    this.total = this.total.toFixed(2);
+    this.updateTotal();
   }
 }
 </script>
@@ -110,7 +122,7 @@ export default {
     font-size: 12px;
   }
 
-  section p.noItems{
+  .no-items{
     font-style: italic;
     font-size: 15px;
     text-align: center;

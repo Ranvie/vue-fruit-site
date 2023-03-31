@@ -1,13 +1,13 @@
 <template>
   <div>
     <header>
-      <NavBar @navbarClicked="handleNavbarClick" @onToggleCart="toggleCart"/>
+      <NavBar @navbarClicked="handleNavbarClick" @onToggleCart="toggleCart" :itemsOnCart="Object.keys(this.cart).length.toString()"/>
     </header>
-    <main>
-      <HomePage v-if="isHomePageVisible"/>
-      <ProductPage v-if="isProductPageVisible" />
-      <PastOrdersPage v-if="isPastOrdersPageVisible" />
-      <SideCart v-show="isCartVisible" @onCloseCart="toggleCart"/>
+    <main> <!-- TODO: Talvez trocar pelo VueRouter seja melhor, estudar sobre -->
+      <HomePage v-if="isHomePageVisible" @onAddToCart="addToCart" />
+      <ProductPage v-if="isProductPageVisible" @onAddToCart="addToCart" />
+      <PastOrdersPage v-if="isPastOrdersPageVisible" :receivedPastOrders="pastOrders"/>
+      <SideCart v-show="isCartVisible" @onCloseCart="toggleCart" :products="cart" @onRemoveListItem="removeListItem" @onCheckout="handleCheckout"/>
     </main>
     <footer>
 
@@ -29,7 +29,9 @@ export default {
       isHomePageVisible: true,
       isProductPageVisible: false,
       isPastOrdersPageVisible: false,
-      isCartVisible: true
+      isCartVisible: false,
+      cart: [],
+      pastOrders: {}
     }
   },
   methods: {
@@ -37,7 +39,6 @@ export default {
     {
       this.togglePages(clicked);
     },
-
     togglePages(clicked)
     {
       switch(clicked)
@@ -64,6 +65,50 @@ export default {
     toggleCart()
     {
       this.isCartVisible = !this.isCartVisible;
+    },
+    addToCart(addedItem)
+    {
+      this.cart.push(addedItem);
+    },
+    removeListItem(index)
+    {
+      let aux = [];
+
+      for(let i=0; i < this.cart.length; i++)
+      {
+        if(i != index)
+        {
+          aux.push(this.cart[i]);
+        }
+      }
+
+      this.cart = aux;
+    },
+    handleCheckout()
+    {
+      let totalOrders = this.pastOrders != {} ? this.cart.concat(...Object.values(this.pastOrders)) : this.cart;
+      this.pastOrders = this.arrayToObj(totalOrders); //TODO: Criar um único objeto que tenha todos os outros, da forma que está, a cada novos itens adicionados, está separando o antigo do novo;
+      console.log(this.pastOrders);
+
+      //let cartJson = JSON.stringify(cartConvToObj);
+      //TODO: O Browser não permite salvar em arquivos;
+      this.cart = [];
+    },
+    arrayToObj(array = [])
+    {
+      let aux = {};
+      let keyID = 0;
+
+      for(let element of array)
+      {
+        if(Object.keys(element).length > 0)
+        {
+          aux[keyID] = element;
+          keyID++;
+        }
+      }
+
+      return aux;
     }
   },
   components: {

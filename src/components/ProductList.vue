@@ -1,5 +1,5 @@
 <template>
-  <table>
+  <table v-if="this.productsToShow != null && Object.keys(this.productsToShow).length > 0">
     <tr>
       <th></th>
       <th>Product</th>
@@ -11,7 +11,7 @@
     <ProductListItem
       v-for="(product, i) in productsToShow"
       :key="i"
-      :iconSrc="Util.requireProdIcon(product)"
+      :iconSrc="product.iconSrc"
       :productName="product.productName"
       :currencyUnit="product.currencyUnit"
       :price="product.price"
@@ -37,7 +37,7 @@ export default {
   methods: {
     removeListItem(index)
     {
-      console.log(index);
+      this.$emit('onRemoveListItem', index);
     }
   },
   props: {

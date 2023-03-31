@@ -5,7 +5,7 @@
       <h2>Recomended</h2>
       <section id="catalog-items">
         <CatalogItem v-for="(product, i) in recommended" :key="i" 
-          :itemName="product.productName" 
+          :productName="product.productName" 
           :type="product.type" 
           :price="product.price" 
           :iconSrc="Util.requireProdIcon(product)" 
@@ -41,7 +41,7 @@ export default {
   methods: {
     handleAddToCart(cartItem)
     {
-      console.log(cartItem);
+      this.$emit('onAddToCart', cartItem);
     },
     generateRecommended(quantity)
     {

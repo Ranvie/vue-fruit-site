@@ -1,7 +1,7 @@
 <template>
   <div class="catalog-item-wrapper">
     <header>
-      <h1 class="capitalize">{{itemName}}</h1>
+      <h1 class="capitalize">{{productName}}</h1>
     </header>
     <section>
       <img :src="iconSrc" />
@@ -31,7 +31,7 @@ export default {
     if(this.quantity == "") { this.quantity = 0; }
   },
   props: {
-    itemName: {
+    productName: {
       type: String,
       default: 'placeholder'
     },
@@ -52,11 +52,11 @@ export default {
   methods: {
     handleAddToCart()
     {
-      this.$emit('onAddToCart', {...this.$props, quantity: this.quantity });
+      if(this.quantity > 0)
+      {
+        this.$emit('onAddToCart', {...this.$props, quantity: this.quantity.toString() });
+      }
     }
-  },
-  computed: {
-  
   }
 }
 </script>

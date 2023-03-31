@@ -38,10 +38,17 @@ export default {
     handleRemoveItem(index)
     {
       this.$emit('onRemoveListItem', index);
+    },
+    updateTotal()
+    {
+      this.total = (Number.parseFloat(this.price) * Number.parseInt(this.quantity)).toFixed(2);
     }
   },
-  mounted() {
-    this.total = (Number.parseFloat(this.price) * Number.parseInt(this.quantity)).toFixed(2);
+  created(){
+    this.updateTotal()
+  },
+  updated(){
+    this.updateTotal()
   }
 }
 </script>
