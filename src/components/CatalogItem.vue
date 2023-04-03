@@ -9,7 +9,7 @@
         <strong>Type:</strong><p class="capitalize"><em>{{type}}</em></p>
         <strong>Price:</strong><p>{{currencyUnit}}{{Number.parseFloat(price).toFixed(2).toString()}}</p>
         <strong>Quantity:</strong>
-        <input type="number" min="0" v-model="quantity"/> <!-- Add a label tag to the input later on -->
+        <input type="number" min="0" v-model="quantity"/> <!-- TODO: Add a label tag to the input later on -->
       </div>
     </section>
     <footer>
@@ -115,7 +115,7 @@ export default {
   }
 
   .catalog-item-wrapper{
-    width: 300px;
+    width: 100%;
   }
 
   .grid{

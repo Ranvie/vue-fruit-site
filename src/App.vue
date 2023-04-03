@@ -1,3 +1,5 @@
+<!-- TODO: Colocar os itens da lista do carrinho em cookie, de forma que carreguem quando abrir a página -->
+
 <template>
   <div>
     <header>
@@ -8,7 +10,6 @@
       <ProductPage v-if="isProductPageVisible" @onAddToCart="addToCart" />
       <PastOrdersPage v-if="isPastOrdersPageVisible" :receivedPastOrders="pastOrders"/>
       <SideCart v-show="isCartVisible" @onCloseCart="toggleCart" :products="cart" @onRemoveListItem="removeListItem" @onCheckout="handleCheckout"/>
-      <!-- TODO: Se tiverem muitos itens no carrinho não dá para ver todos e o botão de checkout fica fora da tela -->
     </main>
     <footer id="footer" class="sticky">
 
@@ -29,9 +30,9 @@ export default {
   name: 'App',
   data() {
     return {
-      isHomePageVisible: false,
+      isHomePageVisible: true,
       isProductPageVisible: false,
-      isPastOrdersPageVisible: true,
+      isPastOrdersPageVisible: false,
       isCartVisible: false,
       cart: [],
       pastOrders: {}

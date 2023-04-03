@@ -43,7 +43,7 @@ export default {
 
 <style scoped>
   #container{
-    width: 70%;
+    width: 80%;
     margin: 50px auto 300px auto;
   }
 
@@ -58,7 +58,15 @@ export default {
     row-gap: 20px;
   }
 
-  #catalog-items CatalogItem{
-    margin: 20px;
+  @media(max-width: 768px){
+    #catalog-items{
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media(max-width: 576px){
+    #catalog-items{
+      grid-template-columns: 1fr;
+    }
   }
 </style>

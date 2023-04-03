@@ -37,4 +37,12 @@ export default {
     -webkit-text-stroke-width: 0.5px;
     -webkit-text-stroke-color: #481F31;
   }
+
+  @media(max-width: 576px)
+  {
+    h1{
+      top: 100%;
+      font-size: 100px;
+    }
+  }
 </style>

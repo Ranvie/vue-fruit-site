@@ -37,14 +37,14 @@ export default {
   nav{
     background-color: #7daa01;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2fr 1fr;
   }
 
-  nav > div{
-    padding: 10px;
-    margin-right: 20px;
-    width: auto;
-    text-align: right;
+  @media(max-width: 576px)
+  {
+    nav{
+      grid-template-columns: 1fr;
+    }
   }
 
   nav img{
@@ -65,6 +65,14 @@ export default {
     border-right: 1px solid white;
   }
 
+  @media(max-width: 576px){
+    li{
+      padding: 20px 20px;
+      display: block;
+      text-align: center;
+    }
+  }
+
   li:hover{
     cursor: pointer;
     background-color: rgba(255, 255, 255, 0.2);
@@ -81,8 +89,23 @@ export default {
     height: 50px;
   }
 
+  .cart-container{
+    padding: 10px;
+    margin-right: 20px;
+    width: auto;
+    text-align: right;
+  }
+
   .cart-container a:hover{
     cursor: pointer;
     color: #486300;
+  }
+
+  @media(max-width: 576px)
+  {
+    .cart-container{
+      width: 100%;
+      text-align: right;
+    }
   }
 </style>
