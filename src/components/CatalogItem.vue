@@ -31,6 +31,10 @@ export default {
     if(this.quantity == "") { this.quantity = 0; }
   },
   props: {
+    id: {
+      type: String,
+      default: '0'
+    },
     productName: {
       type: String,
       default: 'placeholder'
@@ -54,7 +58,7 @@ export default {
     {
       if(this.quantity > 0)
       {
-        this.$emit('onAddToCart', {...this.$props, quantity: this.quantity.toString() });
+        this.$emit('onAddToCart', {...this.$props, quantity: this.quantity.toString()});
       }
     }
   }

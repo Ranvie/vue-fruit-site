@@ -4,11 +4,12 @@
       <h2>Products</h2>
       <section id="catalog-items">
         <CatalogItem 
-          v-for="(product, i) in products" :key="i" 
+          v-for="(product, i) in products" :key="i"
+          :id="product.id" 
           :productName="product.productName"
           :type="product.type" 
           :price="product.price" 
-          :iconSrc="Utils.requireProdIcon(product)" 
+          :iconSrc="Utils.requireImg(product.iconSrc)" 
           @onAddToCart="handleAddToCart"
         />
       </section>

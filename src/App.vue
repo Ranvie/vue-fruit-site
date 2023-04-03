@@ -1,4 +1,6 @@
-<!-- TODO: Colocar os itens da lista do carrinho em cookie, de forma que carreguem quando abrir a página -->
+<!-- TODO: Colocar os itens da lista do carrinho em cookie, de forma que carreguem quando abrir a página 
+           A página de ordens passadas fica com o rodapé no lugar errado para telas pequenas
+-->
 
 <template>
   <div>
@@ -23,6 +25,9 @@ import HomePage from './assets/views/HomePage.vue'
 import ProductPage from './assets/views/ProductPage.vue'
 import PastOrdersPage from './assets/views/PastOrdersPage.vue'
 import SideCart from './components/SideCart.vue'
+import VueCookie from 'vue-cookie'
+import ProductJson from './data/products.json'
+import UtilMethods from './shared/UtilMethods.vue'
 
 let footer;
 
@@ -46,7 +51,50 @@ export default {
       this.toggleStickyFooter();
     });
   },
+  created()
+  {
+    if(navigator.cookieEnabled)
+    {
+      let content = VueCookie.get("cart-items");
+
+      if(content != null)
+      {
+        this.loadCookieCart(JSON.parse(content));
+      }
+    }
+  },
   methods: {
+    loadCookieCart(items = [])
+    {
+      for(let item of items)
+      {
+        if(!this.isNumber(item.id)) { continue; }
+        this.cart.push({...ProductJson[item.id], quantity: item.qty});
+      }
+
+      for(let item of this.cart)
+      {
+        if(!item.iconSrc.includes('data:'))
+        {
+          item.iconSrc = UtilMethods.requireImg(item.iconSrc);
+        }
+      }
+    },
+    isNumber(value)
+    {
+      return !isNaN(Number.parseInt(value));
+    },
+    setupCookieCart(cart = [])
+    {
+      let cookieCart = [];
+
+      for(let i=0; i < cart.length; i++)
+      {
+        cookieCart.push({id: `${cart[i].id}`, qty: `${cart[i].quantity}`});
+      }
+
+      return cookieCart;
+    },
     handleNavbarClick(clicked)
     {
       this.togglePages(clicked);
@@ -95,6 +143,7 @@ export default {
     addToCart(addedItem)
     {
       this.cart.push(addedItem);
+      if(navigator.cookieEnabled) { VueCookie.set("cart-items", JSON.stringify(this.setupCookieCart(this.cart)), { expires: '1M' }); }
     },
     removeListItem(index)
     {
@@ -109,15 +158,15 @@ export default {
       }
 
       this.cart = aux;
+      if(navigator.cookieEnabled) { VueCookie.set("cart-items", JSON.stringify(this.setupCookieCart(this.cart)), { expires: '1M' }); }
     },
     handleCheckout()
     {
       let totalOrders = this.pastOrders != {} ? this.cart.concat(...Object.values(this.pastOrders)) : this.cart;
       this.pastOrders = this.arrayToObj(totalOrders);
 
-      //let cartJson = JSON.stringify(cartConvToObj);
-      //TODO: O Browser não permite salvar em arquivos;
       this.cart = [];
+      VueCookie.set("cart-items", JSON.stringify([]));
     },
     arrayToObj(array = [])
     {

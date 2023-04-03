@@ -4,11 +4,12 @@
     <div id="container">
       <h2>Recomended</h2>
       <section id="catalog-items">
-        <CatalogItem v-for="(product, i) in recommended" :key="i" 
+        <CatalogItem v-for="(product, i) in recommended" :key="i"
+          :id="product.id" 
           :productName="product.productName" 
           :type="product.type" 
           :price="product.price" 
-          :iconSrc="Util.requireProdIcon(product)" 
+          :iconSrc="Util.requireImg(product.iconSrc)" 
           @onAddToCart="handleAddToCart"
         />
       </section>

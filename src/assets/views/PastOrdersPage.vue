@@ -29,7 +29,7 @@ export default {
         {
           if(!this.pastOrders[i].iconSrc.includes('data:'))
           {
-            this.pastOrders[i].iconSrc = UtilMethods.requireProdIcon(this.pastOrders[i]);
+            this.pastOrders[i].iconSrc = UtilMethods.requireImg(this.pastOrders[i].iconSrc);
           }
         }
       }

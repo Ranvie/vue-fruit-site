@@ -1,7 +1,7 @@
 <template>
   <tr>
     <td><img :src="iconSrc"></td>
-    <td>{{productName}}</td>
+    <td class="capitalize">{{productName}}</td>
     <td>{{currencyUnit}}{{Number.parseFloat(price).toFixed(2).toString()}}</td>
     <td>{{quantity}}</td>
     <td>{{currencyUnit}}{{total}}</td>
@@ -75,5 +75,9 @@ export default {
     cursor: pointer;
     background-color: #538636;
     color: #e4dfd9;
+  }
+
+  .capitalize{
+    text-transform: capitalize;
   }
 </style>

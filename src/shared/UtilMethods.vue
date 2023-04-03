@@ -1,10 +1,10 @@
 <script>
 export default {
-  requireProdIcon(product)
+  requireImg(imgSrc)
   {
     try
     {
-      return require(`@/${product.iconSrc}`);
+      return require(`@/${imgSrc}`);
     }
     catch(err)
     {
