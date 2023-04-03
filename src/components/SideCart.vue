@@ -79,7 +79,8 @@ export default {
     top: 0;
     width: 100%;
     height: 100%;
-    z-index: 1; /* Dar preferência de seleção para a página, não para o carrinho */
+    z-index: 1;
+    pointer-events: none;
   }
 
   aside{
@@ -87,6 +88,7 @@ export default {
     margin: 0 0 0 auto;
     color: white;
     height: 100%;
+    pointer-events: auto;
   }
 
   header{
@@ -116,10 +118,22 @@ export default {
   }
 
   section{
-    height: 100%;
+    height: 95%;
     padding: 15px;
     background-color: #030014;
     font-size: 12px;
+    overflow: auto;
+  }
+
+  section::-webkit-scrollbar{
+    width: 10px;
+    background-color: inherit;
+  }
+
+  section::-webkit-scrollbar-thumb{
+    border: 1px solid white;
+    background-color: inherit;
+    border-radius: 20px;
   }
 
   .no-items{

@@ -8,8 +8,9 @@
       <ProductPage v-if="isProductPageVisible" @onAddToCart="addToCart" />
       <PastOrdersPage v-if="isPastOrdersPageVisible" :receivedPastOrders="pastOrders"/>
       <SideCart v-show="isCartVisible" @onCloseCart="toggleCart" :products="cart" @onRemoveListItem="removeListItem" @onCheckout="handleCheckout"/>
+      <!-- TODO: Se tiverem muitos itens no carrinho não dá para ver todos e o botão de checkout fica fora da tela -->
     </main>
-    <footer>
+    <footer id="footer" class="sticky">
 
     </footer>
   </div>
@@ -22,17 +23,27 @@ import ProductPage from './assets/views/ProductPage.vue'
 import PastOrdersPage from './assets/views/PastOrdersPage.vue'
 import SideCart from './components/SideCart.vue'
 
+let footer;
+
 export default {
   name: 'App',
   data() {
     return {
-      isHomePageVisible: true,
+      isHomePageVisible: false,
       isProductPageVisible: false,
-      isPastOrdersPageVisible: false,
+      isPastOrdersPageVisible: true,
       isCartVisible: false,
       cart: [],
       pastOrders: {}
     }
+  },
+  mounted()
+  {
+    footer = document.getElementById("footer");
+
+    document.body.addEventListener('DOMSubtreeModified', () => {
+      this.toggleStickyFooter();
+    });
   },
   methods: {
     handleNavbarClick(clicked)
@@ -62,6 +73,20 @@ export default {
       this.isProductPageVisible = products;
       this.isPastOrdersPageVisible = pastOrders;
     },
+    toggleStickyFooter()
+    {
+      let bodyHeight = document.body.offsetHeight;
+      let viewportHeight = window.innerHeight;
+
+      if(bodyHeight > viewportHeight)
+      {
+        footer.classList.remove("sticky");
+      }
+      else
+      {
+        footer.classList.add("sticky");
+      }
+    },
     toggleCart()
     {
       this.isCartVisible = !this.isCartVisible;
@@ -87,8 +112,7 @@ export default {
     handleCheckout()
     {
       let totalOrders = this.pastOrders != {} ? this.cart.concat(...Object.values(this.pastOrders)) : this.cart;
-      this.pastOrders = this.arrayToObj(totalOrders); //TODO: Criar um único objeto que tenha todos os outros, da forma que está, a cada novos itens adicionados, está separando o antigo do novo;
-      console.log(this.pastOrders);
+      this.pastOrders = this.arrayToObj(totalOrders);
 
       //let cartJson = JSON.stringify(cartConvToObj);
       //TODO: O Browser não permite salvar em arquivos;
@@ -134,6 +158,13 @@ export default {
   footer{
     height: 50px;
     background-color: #481F31;
+  }
+
+  footer.sticky{
+    position: absolute;
+    width: 100%;
+    top: 100%;
+    transform: translateY(-100%);
   }
 
   #app{
